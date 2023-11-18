@@ -42,6 +42,17 @@ export default function AbsenPage() {
     const [absenLocInfo, setAbsenLocInfo] = useState(null);
     const [formattedAbsenLoc, setFormattedAbsenLoc] = useState(null);
     const [formattedUserLoc, setFormattedUserLoc] = useState(null);
+    const svgMarker = useMemo(() => {
+        return {
+            path: "M-1.547 12l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM0 0q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+            fillColor: "blue",
+            fillOpacity: 0.6,
+            strokeWeight: 0,
+            rotation: 0,
+            scale: 2,
+            anchor: isLoaded && new google.maps.Point(0, 20),
+        };
+    }, [isLoaded]);
 
     const locations = useMemo(() => {
         return {
@@ -224,6 +235,7 @@ export default function AbsenPage() {
 
                                             setAbsenLocInfo({ lat: e.latLng.lat(), lng: e.latLng.lng() });
                                         }}
+                                        icon={svgMarker}
                                     />
                                     {absenLocInfo && (
                                         <InfoWindow
@@ -238,10 +250,8 @@ export default function AbsenPage() {
                                     <Circle center={locations} radius={5} options={closeOptions} />
                                     {userLocation && (
                                         <Marker
+                                            // icon={svgMarker}
                                             position={userLocation}
-                                            icon={
-                                                "https://res.cloudinary.com/dscsxprie/image/upload/v1700221789/absensi-app/ai2gmzfplaztivkwdjtp.png"
-                                            }
                                             onClick={(e) => {
                                                 const geocoder = new google.maps.Geocoder();
                                                 geocoder
