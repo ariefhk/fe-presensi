@@ -1,7 +1,7 @@
 "use client";
 
 import { absenLocationCoordinate } from "@/data/absenLocation";
-import { useLoadScript, GoogleMap, Marker, Circle, DirectionsRenderer, InfoWindow } from "@react-google-maps/api";
+import { useLoadScript, GoogleMap, MarkerF, Circle, DirectionsRenderer, InfoWindow } from "@react-google-maps/api";
 import { useMemo, useState, useEffect, useRef, useCallback } from "react";
 import clsx from "clsx";
 import Clock from "@/components/Clock";
@@ -217,7 +217,7 @@ export default function AbsenPage() {
                                             }}
                                         />
                                     )}
-                                    <Marker
+                                    <MarkerF
                                         position={locations}
                                         onClick={(e) => {
                                             const geocoder = new google.maps.Geocoder();
@@ -249,7 +249,7 @@ export default function AbsenPage() {
                                     )}
                                     <Circle center={locations} radius={5} options={closeOptions} />
                                     {userLocation && (
-                                        <Marker
+                                        <MarkerF
                                             // icon={svgMarker}
                                             position={userLocation}
                                             onClick={(e) => {
